@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solar System Orrery</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400&display=swap" rel="stylesheet">
+    <style>
+        body { 
+            margin: 0; 
+            background-color: black; 
+            overflow: hidden; 
+            font-family: 'Fredoka', sans-serif;
+        }
+        #info { 
+            position: absolute; 
+            top: 20px; 
+            width: 100%; 
+            text-align: center; 
+            color: white; 
+            font-size: 24px; 
+            font-weight: bold;
+        }
+        canvas { 
+            display: block; 
+        }
+        #popup { 
+            display: none; 
+            position: absolute; 
+            right: 0; 
+            top: 0; 
+            width: 30%; 
+            height: 100%; 
+            background: rgba(0, 0, 0, 0.8); 
+            color: white; 
+            border-left: 1px solid #444; 
+            padding: 20px; 
+            z-index: 10; 
+            overflow-y: auto;
+        }
+        #close { 
+            cursor: pointer; 
+            color: red; 
+            text-align: right;
+        }
+        #close:hover {
+            color: darkred;
+        }
+        #controls { 
+            position: absolute; 
+            bottom: 140px; 
+            left: 20px; 
+            color: white; 
+            font-family: Arial, sans-serif; 
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 10px;
+        }
+        #controls input { 
+            margin-right: 10px; 
+        }
+        #speedControl { 
+            margin-top: 20px; 
+        }
+        #clock, #date {
+            position: absolute;
+            bottom: 80px; 
+            left: 20px;
+            color: white;
+            font-size: 18px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 5px;
+        }
+        #date {
+            bottom: 50px; 
+        }
+        #sidebar {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 10px;
+            border-radius: 10px;
+            z-index: 10;
+        }
+        #sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+        #sidebar li {
+            cursor: pointer;
+            padding: 10px;
+            margin: 5px 0;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        #sidebar li:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        .planet-info-image {
+            width: 100%; 
+            height: auto; 
+            max-width: 300px; 
+            max-height: 300px; 
+        }
+    </style>
+</head>
+<body>
+    <div id="info">Solar System Orrery</div>
+    <div id="popup">
+        <div id="close">Close</div>
+        <div id="planetInfo"></div>
+    </div>
+    <div id="controls">
+        <label><input type="checkbox" id="toggleOrbits" checked> Show Orbits</label>
+        <label><input type="checkbox" id="toggleLabels" checked> Show Labels</label>
+        <div id="speedControl">
+            Speed Control: <input type="range" id="speedSlider" min="1" max="10" value="1" step="1"> <span id="speedValue">1.0x</span>
+        </div>
+        <div id="sizeCompressionControl">
+            Size Compression: <input type="range" id="compressionSlider" min="1" max="1.01" value="1" step=".001"> <span id="compressionAmount">1.0x</span>
+        </div>
+    </div>
+    <div id="clock"></div>
+    <div id="date"></div>
+    <div id="sidebar">
+        <ul id="planetList">
+                <!-- <li id="sunButton">Sun</li> -->
+        </ul>
+    </div>
+    <script type="module" src="/src/scene_builder.ts"></script>
+</body>
+</html>
